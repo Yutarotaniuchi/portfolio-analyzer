@@ -13,10 +13,13 @@ const TH=[
   {label:"S&P500",icon:"US",q:"2026年のS&P500と米国株の最新状況を分析。このポートフォリオへの影響をJSONで。"},
   {label:"FRB動向",icon:"FRB",q:"2026年のFRB金融政策を分析。S&P500崩壊条件Bへの影響をJSONで。"},
   {label:"日本GDP",icon:"GDP",q:"2026年の日本GDPを分析。日本株売りトリガーへの影響をJSONで。"},
-  {label:"AI半導体",icon:"AI",q:""AI半導体セクター最新状況。S&P500への影響をJSONで。"
+  {label:"AI半導体",icon:"AI",q:"AI半導体の現状をJSONで。"
+"
 "},
-  {label:"ゴールド",icon:"AU",q:"2026年のゴールド価格動向を分析。暴落プロトコルへの影響をJSONで。"},
-  {label:"地政学",icon:"GEO",q:""地政学リスク最新状況。防衛ETF影響をJSONで。"
+  {label:"ゴールド",icon:"AU",q:"ゴールド価格の現状をJSONで。"
+"},
+  {label:"地政学",icon:"GEO",q:"地政学リスクの現状をJSONで。"
+"
 "},
   {label:"外国人動向",icon:"FOR",q:"2026年の外国人の日本株売買を分析。日本株売りトリガーへの影響をJSONで。"}
 ];
