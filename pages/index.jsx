@@ -78,7 +78,7 @@ export default function App(){
       setCurScan(t.label);
       try{const result=await ai(t.q);push(result,t.icon+" "+t.label);}
       catch{push({signal:"WATCH",target:t.label,confidence:0,rule:"エラー",action:"再試行",reason:"接続エラー",risk:"LOW",urgency:1},t.icon+" "+t.label);}
-      await new Promise(r=>setTimeout(r,8000));
+      await new Promise(r=>setTimeout(r,15000));
     }
     setCurScan(null);setScanning(false);scanRef.current=false;
   };
