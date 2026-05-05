@@ -14,7 +14,8 @@ export default async function handler(req,res){
     const d=await r.json();
     const t=d.content.map(i=>i.type==="text"?i.text:"").filter(Boolean).join("\n").trim();
     const m=t.replace(/```json|```/g,"").trim().match(/\{[\s\S]*\}/);
-    if(!m)return res.status(500).json({error:"parse failed",raw:t.slice(0,200)});
+    if(!m)return res.status(200).json({signal:"WATCH",target:"分析中",confidence:50,rule:"解析エラー",action:"再試行",reason:t.slice(0,100),risk:"LOW",urgency:1});
+
     return res.status(200).json(JSON.parse(m[0]));
   }catch(e){
     return res.status(500).json({error:e.message||"server error"});
