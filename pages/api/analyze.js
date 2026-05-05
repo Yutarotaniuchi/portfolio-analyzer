@@ -5,7 +5,7 @@ export default async function handler(req,res){
     const r=await fetch("https://api.anthropic.com/v1/messages",{
       method:"POST",
       headers:{"Content-Type":"application/json","x-api-key":process.env.ANTHROPIC_API_KEY,"anthropic-version":"2023-06-01"},
-      body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:1000,messages:[{role:"user",content:context+"\n\n分析してください: "+question}]})
+      body:JSON.stringify({model:"claude-sonnet-4-5",max_tokens:1000,messages:[{role:"user",content:context+"\n\n分析してください: "+question}]})
     });
     if(!r.ok){const e=await r.text();return res.status(r.status).json({error:e.slice(0,100)});}
     const d=await r.json();
