@@ -9,8 +9,8 @@ export default async function handler(req,res){
       body:JSON.stringify({
         model:"claude-sonnet-4-5",
         max_tokens:1000,
-        tools:[{"type":"web_search_20250305","name":"web_search"}],
-        messages:[{role:"user",content:context+"\n\n"+question+"\n\n最新情報をウェブ検索してから、JSON形式のみで回答。前置きや説明は不要。{から始めて}で終わること。"}]
+        tools:[{"type":"web_search_20250305","name":"web_search","max_uses":2}],
+        messages:[{role:"user",content:context+"\n\n"+question+"\n\n最新情報をウェブ検索してから分析し、JSON形式のみで回答。前置きや説明は不要。{から始めて}で終わること。"}]
       })
     });
     if(!r.ok){const e=await r.text();return res.status(r.status).json({error:e.slice(0,200)});}
