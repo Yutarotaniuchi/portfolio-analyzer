@@ -1,6 +1,6 @@
 import{useState,useEffect,useRef}from"react";
 const CTX=`投資アナリスト。PF: S&P500(50%)/日経高配当50(15%)/ゴールド(10%)/AI半導体(5%)/防衛(10%)/J-REIT(5%) 売りルール: 配当2期減配+GDP悪化, FRB年3回利上げ/テック2期下振れ/米GDP2四半期マイナスのうち2つ以上 必ずJSON: {"signal":"HOLD","target":"銘柄","confidence":75,"rule":"ルール","action":"行動","reason":"理由","risk":"LOW","urgency":3}`;
-
+async function ai(q){
   const r=await fetch("/api/analyze",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({context:CTX,question:q})});
   if(!r.ok)throw new Error("error");
   const p=await r.json();
@@ -13,19 +13,13 @@ const TH=[
   {label:"S&P500",icon:"US",q:"2026年のS&P500と米国株の最新状況を分析。このポートフォリオへの影響をJSONで。"},
   {label:"FRB動向",icon:"FRB",q:"2026年のFRB金融政策を分析。S&P500崩壊条件Bへの影響をJSONで。"},
   {label:"日本GDP",icon:"GDP",q:"2026年の日本GDPを分析。日本株売りトリガーへの影響をJSONで。"},
-  {label:"AI半導体",icon:"AI",q:"AI半導体の現状をJSONで。"
-"
-"},
-  {label:"ゴールド",icon:"AU",q:"ゴールド価格の現状をJSONで。"
-"},
-  {label:"地政学",icon:"GEO",q:"地政学リスクの現状をJSONで。"
-"
-"},
+  {label:"AI半導体",icon:"AI",q:"AI半導体の現状をJSONで。"},
+  {label:"ゴールド",icon:"AU",q:"ゴールド価格の現状をJSONで。"},
+  {label:"地政学",icon:"GEO",q:"地政学リスクの現状をJSONで。"},
   {label:"外国人動向",icon:"FOR",q:"2026年の外国人の日本株売買を分析。日本株売りトリガーへの影響をJSONで。"}
 ];
 const SG={BUY:{c:"#00FF88",bg:"rgba(0,255,136,0.07)",bd:"rgba(0,255,136,0.3)"},SELL:{c:"#FF4466",bg:"rgba(255,68,102,0.07)",bd:"rgba(255,68,102,0.3)"},HOLD:{c:"#C8A96E",bg:"rgba(200,169,110,0.07)",bd:"rgba(200,169,110,0.3)"},ALERT:{c:"#FF8C00",bg:"rgba(255,140,0,0.07)",bd:"rgba(255,140,0,0.3)"},WATCH:{c:"#00CFFF",bg:"rgba(0,207,255,0.07)",bd:"rgba(0,207,255,0.3)"}};
 const RC={LOW:"#00FF88",MEDIUM:"#C8A96E",HIGH:"#FF8C00",CRITICAL:"#FF4466"};
-
 function Card({item}){
   const{result:r,source,time}=item;
   const s=SG[r.signal]||SG.HOLD;
