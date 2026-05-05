@@ -1,6 +1,6 @@
 import{useState,useEffect,useRef}from"react";
-const CTX=`あなたは投資アナリストです。ポートフォリオ: S&P500(50%)/日経高配当50(15%)/ゴールド(10%)/AI半導体(5%)/防衛JP(5%)/防衛GL(5%)/J-REIT(5%) NISA月30万: S&P500(12万)/オルカン(5万)/日経(8万)/全世界高配当(5万) 売りルール: 日本株=配当2期連続減配+GDP悪化, S&P崩壊=FRB年3回利上げ/テック決算2期下振れ/米GDP2四半期マイナスのうち2つ以上 暴落: -15%→現金150万/-25%→ゴールド200万売/-35%→ゴールド+REIT売 鉄の掟: 感情で売らない/NISA死守/S&P500売らない/J-REIT最後まで 必ずJSON形式のみ: {"signal":"HOLD","target":"銘柄","confidence":75,"rule":"ルール","action":"行動","reason":"理由","risk":"LOW","urgency":3} signalはBUY/SELL/HOLD/ALERT/WATCH riskはLOW/MEDIUM/HIGH/CRITICAL`;
-async function ai(q){
+const CTX=`投資アナリスト。PF: S&P500(50%)/日経高配当50(15%)/ゴールド(10%)/AI半導体(5%)/防衛(10%)/J-REIT(5%) 売りルール: 配当2期減配+GDP悪化, FRB年3回利上げ/テック2期下振れ/米GDP2四半期マイナスのうち2つ以上 必ずJSON: {"signal":"HOLD","target":"銘柄","confidence":75,"rule":"ルール","action":"行動","reason":"理由","risk":"LOW","urgency":3}`;
+
   const r=await fetch("/api/analyze",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({context:CTX,question:q})});
   if(!r.ok)throw new Error("error");
   const p=await r.json();
