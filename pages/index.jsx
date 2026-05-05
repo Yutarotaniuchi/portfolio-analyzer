@@ -4,7 +4,7 @@ async function ai(q){
   const r=await fetch("/api/analyze",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({context:CTX,question:q})});
   if(!r.ok)throw new Error("error");
   const p=await r.json();
-  if(p.error)throw new Error(p.error);
+  if(p.error&&!p.signal)throw new Error(p.error);
   const S=["BUY","SELL","HOLD","ALERT","WATCH"],R=["LOW","MEDIUM","HIGH","CRITICAL"];
   return{signal:S.includes(p.signal)?p.signal:"HOLD",target:p.target||"不明",confidence:isFinite(+p.confidence)?Math.max(0,Math.min(100,+p.confidence)):50,rule:p.rule||"—",action:p.action||"確認",reason:p.reason||"完了",risk:R.includes(p.risk)?p.risk:"LOW",urgency:isFinite(+p.urgency)?Math.max(1,Math.min(10,+p.urgency)):3};
 }
